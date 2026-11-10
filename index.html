@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYAPay - Masuk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <h1 class="text-2xl font-bold text-blue-600 mb-2">⚡ AYAPay</h1>
+        <p class="text-gray-500 mb-6 text-sm">Dompet digital praktis, nyata, dan mandiri.</p>
+        
+        <form id="auth-form" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                <input type="text" id="phone" placeholder="Contoh: 081234567890" required class="w-full mt-1 p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password / PIN</label>
+                <input type="password" id="password" placeholder="••••••••" required class="w-full mt-1 p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-xl font-semibold hover:bg-blue-700 transition">Masuk / Daftar</button>
+        </form>
+        <div id="msg" class="mt-4 text-center text-sm font-medium"></div>
+    </div>
+
+    <!-- SDK Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
