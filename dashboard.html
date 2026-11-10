@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AYAPay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Library QR Scanner (HTML5 QR Code) -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body class="bg-slate-50 pb-20">
+    <div class="max-w-md mx-auto p-4">
+        <!-- Kartu Saldo -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-3xl shadow-lg mt-4">
+            <p class="text-sm opacity-80">Saldo AYAPay Anda</p>
+            <h2 id="user-balance" class="text-3xl font-bold mt-1">Rp 0</h2>
+            <p id="user-phone" class="text-xs mt-3 opacity-90">No. HP: Memuat...</p>
+        </div>
+
+        <!-- Menu Aksi Cepat -->
+        <div class="grid grid-cols-2 gap-4 mt-6">
+            <button onclick="openTransferModal()" class="bg-white p-4 rounded-2xl shadow-sm border flex flex-col items-center justify-center hover:bg-blue-50 transition">
+                <span class="text-2xl mb-1">💸</span>
+                <span class="font-semibold text-sm text-gray-700">Kirim Uang</span>
+            </button>
+            <button onclick="openScanModal()" class="bg-white p-4 rounded-2xl shadow-sm border flex flex-col items-center justify-center hover:bg-blue-50 transition">
+                <span class="text-2xl mb-1">📷</span>
+                <span class="font-semibold text-sm text-gray-700">Scan QR</span>
+            </button>
+        </div>
+
+        <!-- Riwayat Transaksi -->
+        <div class="mt-8">
+            <h3 class="font-bold text-gray-800 mb-3">Aktivitas Terakhir</h3>
+            <div id="tx-list" class="space-y-2">
+                <p class="text-sm text-gray-400 text-center py-4">Memuat riwayat...</p>
+            </div>
+        </div>
+        
+        <button onclick="logout()" class="w-full mt-8 text-red-500 font-semibold text-sm py-2">Keluar Akun</button>
+    </div>
+
+    <!-- Modal Kirim Uang ke Nomor Telepon -->
+    <div id="transfer-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-sm p-6 rounded-3xl shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Kirim Uang via No. HP</h3>
+            <form id="transfer-form" class="space-y-3">
+                <input type="text" id="target-phone" placeholder="No. HP Tujuan (Cth: 081...)" required class="w-full p-3 border rounded-xl text-sm outline-none">
+                <input type="number" id="transfer-amount" placeholder="Nominal (Rp)" required class="w-full p-3 border rounded-xl text-sm outline-none">
+                <div class="flex gap-2 mt-4">
+                    <button type="button" onclick="closeTransferModal()" class="flex-1 bg-gray-200 text-gray-700 py-2.5 rounded-xl font-semibold text-sm">Batal</button>
+                    <button type="submit" class="flex-1 bg-blue-600 text-white py-2.5 rounded-xl font-semibold text-sm">Kirim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Scan QR Kamera Nyata -->
+    <div id="scan-modal" class="fixed inset-0 bg-black/80 hidden flex flex-col items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-sm p-6 rounded-3xl shadow-xl text-center">
+            <h3 class="text-lg font-bold mb-2">Scan QR Code</h3>
+            <p class="text-xs text-gray-500 mb-4">Arahkan kamera ke QR Code tujuan pembayaran.</p>
+            <div id="reader" class="w-full rounded-xl overflow-hidden"></div>
+            <button onclick="closeScanModal()" class="mt-4 bg-red-500 text-white w-full py-2.5 rounded-xl font-semibold text-sm">Tutup Kamera</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+    <script src="scanner.js"></script>
+</body>
+</html>
